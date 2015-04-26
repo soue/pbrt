@@ -1,0 +1,140 @@
+// !$*UTF8*$!
+{
+	08FB7793FE84155DC02AAC07 /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = 268AE2851A66F02900E699D8 /* pbrt */;
+		activeSDKPreference = macosx10.5;
+		activeTarget = 8DD76F620486A84900D96B5E /* pbrt */;
+		codeSenseManager = 268AE2891A66F02A00E699D8 /* Code sense */;
+		executables = (
+			268AE2851A66F02900E699D8 /* pbrt */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXErrorsWarningsDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXErrorsWarningsDataSource_LocationID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					300,
+					723,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXErrorsWarningsDataSource_TypeID,
+					PBXErrorsWarningsDataSource_MessageID,
+					PBXErrorsWarningsDataSource_LocationID,
+				);
+			};
+			PBXConfiguration.PBXFileTableDataSource3.PBXExecutablesDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXExecutablesDataSource_NameID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					22,
+					300,
+					720.58349609375,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXExecutablesDataSource_ActiveFlagID,
+					PBXExecutablesDataSource_NameID,
+					PBXExecutablesDataSource_CommentsID,
+				);
+			};
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					1473,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 443988757;
+			PBXWorkspaceStateSaveDate = 443988757;
+		};
+		perUserProjectItems = {
+			261A61ED1A76BD77003BB2CF /* PBXTextBookmark */ = 261A61ED1A76BD77003BB2CF /* PBXTextBookmark */;
+			261A62011A76FDF3003BB2CF /* PBXTextBookmark */ = 261A62011A76FDF3003BB2CF /* PBXTextBookmark */;
+		};
+		sourceControlManager = 268AE2881A66F02A00E699D8 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	261A61ED1A76BD77003BB2CF /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "error: pbrtparse.hh: No such file or directory";
+		fRef = B1D8EB91117030F200A8A49E /* pbrtlex.ll */;
+		rLen = 1;
+		rLoc = 49;
+		rType = 1;
+	};
+	261A62011A76FDF3003BB2CF /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B1D8EB91117030F200A8A49E /* pbrtlex.ll */;
+		name = "pbrtlex.ll: 50";
+		rLen = 24;
+		rLoc = 1762;
+		rType = 0;
+		vrLen = 504;
+		vrLoc = 1433;
+	};
+	268AE2851A66F02900E699D8 /* pbrt */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = pbrt;
+		sourceDirectories = (
+		);
+	};
+	268AE2881A66F02A00E699D8 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+		};
+	};
+	268AE2891A66F02A00E699D8 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	8DD76F620486A84900D96B5E /* pbrt */ = {
+		activeExec = 0;
+		executables = (
+			268AE2851A66F02900E699D8 /* pbrt */,
+		);
+	};
+	B1D8EB91117030F200A8A49E /* pbrtlex.ll */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {741, 2926}}";
+			sepNavSelRange = "{1762, 24}";
+			sepNavVisRange = "{1434, 445}";
+		};
+	};
+}
