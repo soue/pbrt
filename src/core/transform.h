@@ -175,7 +175,7 @@ private:
     friend struct Quaternion;
 };
 
-
+Transform fromFrame(const Vector &v1);
 Transform Translate(const Vector &delta);
 Transform Scale(float x, float y, float z);
 Transform RotateX(float angle);
