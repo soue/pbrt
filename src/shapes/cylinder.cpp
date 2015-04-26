@@ -1,3 +1,4 @@
+
 /*
     pbrt source code Copyright(c) 1998-2012 Matt Pharr and Greg Humphreys.
 
@@ -33,6 +34,7 @@
 #include "stdafx.h"
 #include "shapes/cylinder.h"
 #include "paramset.h"
+#include <iostream>
 
 // Cylinder Method Definitions
 Cylinder::Cylinder(const Transform *o2w, const Transform *w2o, bool ro,
@@ -43,7 +45,6 @@ Cylinder::Cylinder(const Transform *o2w, const Transform *w2o, bool ro,
     zmax = max(z0, z1);
     phiMax = Radians(Clamp(pm, 0.0f, 360.0f));
 }
-
 
 BBox Cylinder::ObjectBound() const {
     Point p1 = Point(-radius, -radius, zmin);
@@ -197,7 +198,26 @@ Cylinder *CreateCylinderShape(const Transform *o2w, const Transform *w2o,
     float zmin = params.FindOneFloat("zmin", -1);
     float zmax = params.FindOneFloat("zmax", 1);
     float phimax = params.FindOneFloat("phimax", 360);
-    return new Cylinder(o2w, w2o, reverseOrientation, radius, zmin, zmax, phimax);
+
+	//printf("%f,%f,%f,%f\n", o2w->GetMatrix().m[0][0], (p[1]).y, (p[1]).z);
+
+	int np1;
+	const Point *p = params.FindPoint("p", &np1);
+
+	if (!p)
+		return new Cylinder(o2w, w2o, reverseOrientation, radius, zmin, zmax, phimax);
+
+	printf("%f,%f,%f", (p[1]).x, (p[1]).y, (p[1]).z);
+
+	Vector rel = p[1] - p[0];
+	float length = rel.Length();
+
+	printf("ok1");
+	Transform ObjectToWorld = (*o2w) * Translate(Vector(p[0])) * fromFrame(rel / length);
+	printf("ok2");
+	Transform WorldToObject = Transpose(ObjectToWorld);
+	printf("ok3");
+	return new Cylinder(&ObjectToWorld, &WorldToObject, reverseOrientation, radius, 0, length, phimax);
 }
 
 
