@@ -155,16 +155,11 @@ Transform Translate(const Vector &delta) {
 }
 
 Transform fromFrame(const Vector &n) {
-	printf("%f,%f,%f\n", n.x, n.y, n.z);
-	Vector s;
-	Vector t;
-	CoordinateSystem(n, &s, &t);
+	Vector s, t;
+	CoordinateSystem(n, &t, &s);
 	
-	printf("%f,%f,%f\n", s.x, s.y, s.z);
-	printf("%f,%f,%f\n", t.x, t.y, t.z);
-
 	Matrix4x4 result(
-		s.x, t.x, n.x, 0,
+		-s.x, t.x, n.x, 0,
 		s.y, t.y, n.y, 0,
 		s.z, t.z, n.z, 0,
 		0, 0, 0, 1

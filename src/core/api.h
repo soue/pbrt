@@ -49,6 +49,7 @@ void pbrtScale(float sx, float sy, float sz);
 void pbrtLookAt(float ex, float ey, float ez,
                 float lx, float ly, float lz,
                 float ux, float uy, float uz);
+void pbrtConcatTransform1(Transform tf);
 void pbrtConcatTransform(float transform[16]);
 void pbrtTransform(float transform[16]);
 void pbrtCoordinateSystem(const string &);

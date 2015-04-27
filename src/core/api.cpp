@@ -109,6 +109,7 @@
 #include "shapes/paraboloid.h"
 #include "shapes/sphere.h"
 #include "shapes/trianglemesh.h"
+#include "shapes/hair.h"
 #include "textures/bilerp.h"
 #include "textures/checkerboard.h"
 #include "textures/constant.h"
@@ -323,9 +324,25 @@ Reference<Shape> MakeShape(const string &name,
         s = CreateSphereShape(object2world, world2object,
                               reverseOrientation, paramSet);
     // Create remaining _Shape_ types
-    else if (name == "cylinder")
-        s = CreateCylinderShape(object2world, world2object, reverseOrientation,
-                                paramSet);
+	else if (name == "cylinder") {
+		int np;
+		const Point *p = paramSet.FindPoint("p", &np);
+
+		if (p && np >= 2) {
+			Vector rel = p[1] - p[0];
+			float length = rel.Length();
+
+			Transform *ObjectToWorld = new Transform((Translate(Vector(p[0])) * fromFrame(rel / length)).GetMatrix());
+			Transform * o2w, *w2o;
+			pbrtConcatTransform1(*ObjectToWorld);
+			transformCache.Lookup(curTransform[0], &o2w, &w2o);
+			s = CreateCylinderShape(o2w, w2o, reverseOrientation,
+				paramSet);
+			pbrtConcatTransform1(Inverse(*ObjectToWorld));
+		} else
+			s = CreateCylinderShape(object2world, world2object, reverseOrientation,
+				paramSet);
+	}
     else if (name == "disk")
         s = CreateDiskShape(object2world, world2object, reverseOrientation,
                             paramSet);
@@ -350,6 +367,60 @@ Reference<Shape> MakeShape(const string &name,
     else if (name == "nurbs")
         s = CreateNURBSShape(object2world, world2object, reverseOrientation,
                              paramSet);
+	else if (name == "hair") {
+		int np, nsp, nclump;
+		const Point *p = paramSet.FindPoint("p", &np);
+		const int *startP = paramSet.FindInt("startP", &nsp);
+		float radius = paramSet.FindOneFloat("radius", 1);
+		printf("radius: %f\n", radius);
+		printf("find p: %d, %d\n", np, nsp);
+
+
+		int clump = paramSet.FindOneInt("clump", 1);
+		printf("clump= %d\n", clump);
+
+		
+		vector<Reference<Shape> > cylinders;
+		float current_r = radius;
+		
+		if (p && np >= 2) {
+			int j = 0;
+			if (startP && startP[j] == 0) j++;
+
+			for (int i = 0; i < np - 1; i++) {
+				if (startP && j < nsp && startP[j] == i + 1) {
+					current_r = radius;
+					j++;
+					continue;
+				}
+				
+				float translation = 0.25;
+				float rotation = 3;
+				float t = 0;
+				float r = 0;
+				for (int j = 0; j < clump; j++) {
+
+				Vector rel = p[i+1] - p[i];
+				printf("%f,%f,%f\n", p[i].x, p[i].y, p[i].z);
+				printf("%f,%f,%f\n", p[i+1].x, p[i+1].y, p[i+1].z);
+				float length = rel.Length();
+
+				Transform *ObjectToWorld = new Transform((Translate(Vector(p[i])) * fromFrame(rel / length)).GetMatrix());
+				Transform *o2w, *w2o;
+				pbrtConcatTransform1(*ObjectToWorld);
+				transformCache.Lookup(curTransform[0], &o2w, &w2o);
+				Cylinder *c = new Cylinder(o2w, w2o, reverseOrientation, current_r, -0.1f * length, length, 360);
+				cylinders.push_back(c);
+				pbrtConcatTransform1(Inverse(*ObjectToWorld));
+				current_r -= 0.05 * radius;
+
+				}
+			}
+			printf("vector size: %d\n", cylinders.size());
+		}
+		s = CreateHairShape(object2world, world2object, reverseOrientation,
+			cylinders);
+	}
     else
         Warning("Shape \"%s\" unknown.", name.c_str());
     paramSet.ReportUnused();
@@ -721,6 +792,10 @@ void pbrtTransform(float tr[16]) {
         tr[3], tr[7], tr[11], tr[15]));)
 }
 
+void pbrtConcatTransform1(Transform tf) {
+	VERIFY_INITIALIZED("ConcatTransform1");
+	FOR_ACTIVE_TRANSFORMS(curTransform[i] = curTransform[i] * tf;)
+}
 
 void pbrtConcatTransform(float tr[16]) {
     VERIFY_INITIALIZED("ConcatTransform");

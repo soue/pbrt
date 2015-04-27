@@ -35,6 +35,7 @@
 #include "shapes/cylinder.h"
 #include "paramset.h"
 #include <iostream>
+#include <cstdio>
 
 // Cylinder Method Definitions
 Cylinder::Cylinder(const Transform *o2w, const Transform *w2o, bool ro,
@@ -199,25 +200,20 @@ Cylinder *CreateCylinderShape(const Transform *o2w, const Transform *w2o,
     float zmax = params.FindOneFloat("zmax", 1);
     float phimax = params.FindOneFloat("phimax", 360);
 
-	//printf("%f,%f,%f,%f\n", o2w->GetMatrix().m[0][0], (p[1]).y, (p[1]).z);
-
 	int np1;
 	const Point *p = params.FindPoint("p", &np1);
 
-	if (!p)
+	if (!p || np1 < 2) {
+		printf("no points input.\n");
 		return new Cylinder(o2w, w2o, reverseOrientation, radius, zmin, zmax, phimax);
+	}
 
-	printf("%f,%f,%f", (p[1]).x, (p[1]).y, (p[1]).z);
+	//o2w->Print(stdout);
 
 	Vector rel = p[1] - p[0];
 	float length = rel.Length();
 
-	printf("ok1");
-	Transform ObjectToWorld = (*o2w) * Translate(Vector(p[0])) * fromFrame(rel / length);
-	printf("ok2");
-	Transform WorldToObject = Transpose(ObjectToWorld);
-	printf("ok3");
-	return new Cylinder(&ObjectToWorld, &WorldToObject, reverseOrientation, radius, 0, length, phimax);
+	return new Cylinder(o2w, w2o, reverseOrientation, radius, 0.0f, length, phimax);
 }
 
 
@@ -230,4 +226,8 @@ Point Cylinder::Sample(float u1, float u2, Normal *Ns) const {
     return (*ObjectToWorld)(p);
 }
 
-
+void Cylinder::printShape() const {
+	printf("shape: Cylinder\n");
+	printf("attr: %f, %f, %f, %f\n", radius, zmin, zmax, phiMax);
+	fflush(stdout);
+}
