@@ -370,41 +370,37 @@ Reference<Shape> MakeShape(const string &name,
 	else if (name == "hair") {
 		int np, nsp, nclump;
 		const Point *p_orig = paramSet.FindPoint("p", &np);
+
 		Point p[np];
 		for (int pp = 0; pp < np; pp++) {
 			p[pp] = p_orig[pp];
 		}
+
 		const int *startP = paramSet.FindInt("startP", &nsp);
 		float radius = paramSet.FindOneFloat("radius", 1);
 		printf("radius: %f\n", radius);
 		printf("find p: %d, %d\n", np, nsp);
 
 		const int clump = paramSet.FindOneInt("clump", 1);
-		printf("clump= %d\n", clump);
+		printf("clump: %d\n", clump);
 		
 		vector<Reference<Shape> > cylinders;
-		//float current_r = radius;
-		
 		if (p && np >= 2) {
-			//int j = 0;
-			//if (startP && startP[j] == 0) j++;
-
-			float t_x = 0.025;
-			float a = 0.25;
-			Matrix4x4 trans, rot;
+			float tx_inc = 0.025;
+			float a_inc = 0.25;
+			float a = -tx_inc;
+			float tx = -a_inc;
+			float current_r;
+			int j;
 			Transform* t;
 			for (int k = 0; k < clump; k++) {
-				float current_r = radius;
-				trans = Translate(Vector(t_x,0,0)).GetMatrix();
-				rot = RotateY(a).GetMatrix();
-				t = new Transform(Matrix4x4::Mul(rot, trans));
-				t->Print(stdout);
-				t_x += 0.025;
-				a -= 0.25;
-				for (int pind = 0; pind < np; pind++) {
+				current_r = radius;
+				t = new Transform(Matrix4x4::Mul(RotateY(a+a_inc).GetMatrix(), 
+						 		Translate(Vector(tx+tx_inc,0,0)).GetMatrix()));
+				for (int pind = 0; pind < np; pind++)
 					p[pind] = Point((*t)(p[pind]));
-				}	
-				int j = 0;
+				
+				j = 0;
 				if (startP && startP[j] == 0) j++;
 
 				for (int i = 0; i < np - 1; i++) {
