@@ -16,6 +16,7 @@ AttributeEnd
 AttributeBegin
   Translate 0 10 0
   Rotate -90 1 0 0
+  Rotate 30 0 0 1
   Texture "checks" "spectrum" "checkerboard"
           "float uscale" [4] "float vscale" [4]
           "rgb tex1" [1 0 0] "rgb tex2" [0 0 1]
@@ -34,267 +35,20 @@ AttributeBegin
 		12.7 0 -24
 		12.75 0 -27
 		12.8 0 -35
+		
+		.5 0 0  
+		5.5 0 -3 
+		8.5 0 -6  
+		9.5 0 -9 
+		10.5 0 -12  
+		11.25 0 -15  
+		13.1 0 -21
+		13.2 0 -24
+		13.25 0 -27
+		13.5 0 -35
 	      ] 
-      #"integer startP" [10 20]
+	"integer startP" [10]
+	"integer clump" [20]
 AttributeEnd
 
-AttributeBegin
-  Translate 0.25 10 0
-  Rotate -90 1 0 0
-  Rotate -3 0 0 1 
-  Texture "checks" "spectrum" "checkerboard"
-          "float uscale" [4] "float vscale" [4]
-          "rgb tex1" [1 0 0] "rgb tex2" [0 0 1]
-  Material "matte"
-#           "color Kd" [0 0 0]
-  Shape "hair" "float radius" [0.1]
-      "point p"
-              [
-                0 0 0
-                5 0 -3
-                8 0 -6
-                9 0 -9
-                10 0 -12
-                10.75 0 -15
-                12.6 0 -21
-                12.7 0 -24
-                12.75 0 -27
-                12.8 0 -35
-              ]
-      #"integer startP" [10 20]
-AttributeEnd
-
-
-AttributeBegin
-  Translate 0.5 10 0
-  Rotate -90 1 0 0
-  Rotate -6 0 0 1 
-  Texture "checks" "spectrum" "checkerboard"
-          "float uscale" [4] "float vscale" [4]
-          "rgb tex1" [1 0 0] "rgb tex2" [0 0 1]
-  Material "matte"
-#           "color Kd" [0 0 0]
-  Shape "hair" "float radius" [0.1]
-      "point p"
-              [
-                0 0 0
-                5 0 -3
-                8 0 -6
-                9 0 -9
-                10 0 -12
-                10.75 0 -15
-                12.6 0 -21
-                12.7 0 -24
-                12.75 0 -27
-                12.8 0 -35
-              ]
-      #"integer startP" [10 20]
-AttributeEnd
-
-
-AttributeBegin
-  Translate 1 10 0
-  Rotate -90 1 0 0
-  Rotate -9 0 0 1 
-  Texture "checks" "spectrum" "checkerboard"
-          "float uscale" [4] "float vscale" [4]
-          "rgb tex1" [1 0 0] "rgb tex2" [0 0 1]
-  Material "matte"
-#           "color Kd" [0 0 0]
-  Shape "hair" "float radius" [0.1]
-      "point p"
-              [
-                0 0 0
-                5 0 -3
-                8 0 -6
-                9 0 -9
-                10 0 -12
-                10.75 0 -15
-                12.6 0 -21
-                12.7 0 -24
-                12.75 0 -27
-                12.8 0 -35
-              ]
-      #"integer startP" [10 20]
-AttributeEnd
-
-
-AttributeBegin
-  Translate 1.25 10 0
-  Rotate -90 1 0 0
-  Rotate -12 0 0 1 
-  Texture "checks" "spectrum" "checkerboard"
-          "float uscale" [4] "float vscale" [4]
-          "rgb tex1" [1 0 0] "rgb tex2" [0 0 1]
-  Material "matte"
-#           "color Kd" [0 0 0]
-  Shape "hair" "float radius" [0.1]
-      "point p"
-              [
-                0 0 0
-                5 0 -3
-                8 0 -6
-                9 0 -9
-                10 0 -12
-                10.75 0 -15
-                12.6 0 -21
-                12.7 0 -24
-                12.75 0 -27
-                12.8 0 -35
-              ]
-      #"integer startP" [10 20]
-AttributeEnd
-
-
-AttributeBegin
-  Translate 1.5 10 0
-  Rotate -90 1 0 0
-  Rotate -15 0 0 1 
-  Texture "checks" "spectrum" "checkerboard"
-          "float uscale" [4] "float vscale" [4]
-          "rgb tex1" [1 0 0] "rgb tex2" [0 0 1]
-  Material "matte"
-#           "color Kd" [0 0 0]
-  Shape "hair" "float radius" [0.1]
-      "point p"
-              [
-                0 0 0
-                5 0 -3
-                8 0 -6
-                9 0 -9
-                10 0 -12
-                10.75 0 -15
-                12.6 0 -21
-                12.7 0 -24
-                12.75 0 -27
-                12.8 0 -35
-              ]
-      #"integer startP" [10 20]
-AttributeEnd
-
-AttributeBegin
-  Translate 1.75 10 0
-  Rotate -90 1 0 0
-  Rotate -18 0 0 1 
-  Texture "checks" "spectrum" "checkerboard"
-          "float uscale" [4] "float vscale" [4]
-          "rgb tex1" [1 0 0] "rgb tex2" [0 0 1]
-  Material "matte"
-#           "color Kd" [0 0 0]
-  Shape "hair" "float radius" [0.1]
-      "point p"
-              [
-                0 0 0
-                5 0 -3
-                8 0 -6
-                9 0 -9
-                10 0 -12
-                10.75 0 -15
-                12.6 0 -21
-                12.7 0 -24
-                12.75 0 -27
-                12.8 0 -35
-              ]
-      #"integer startP" [10 20]
-AttributeEnd
-AttributeBegin
-  Translate 2 10 0
-  Rotate -90 1 0 0
-  Rotate -21 0 0 1 
-  Texture "checks" "spectrum" "checkerboard"
-          "float uscale" [4] "float vscale" [4]
-          "rgb tex1" [1 0 0] "rgb tex2" [0 0 1]
-  Material "matte"
-#           "color Kd" [0 0 0]
-  Shape "hair" "float radius" [0.1]
-      "point p"
-              [
-                0 0 0
-                5 0 -3
-                8 0 -6
-                9 0 -9
-                10 0 -12
-                10.75 0 -15
-                12.6 0 -21
-                12.7 0 -24
-                12.75 0 -27
-                12.8 0 -35
-              ]
-      #"integer startP" [10 20]
-AttributeEnd
-AttributeBegin
-  Translate 2.25 10 0
-  Rotate -90 1 0 0
-  Rotate -24 0 0 1 
-  Texture "checks" "spectrum" "checkerboard"
-          "float uscale" [4] "float vscale" [4]
-          "rgb tex1" [1 0 0] "rgb tex2" [0 0 1]
-  Material "matte"
-#           "color Kd" [0 0 0]
-  Shape "hair" "float radius" [0.1]
-      "point p"
-              [
-                0 0 0
-                5 0 -3
-                8 0 -6
-                9 0 -9
-                10 0 -12
-                10.75 0 -15
-                12.6 0 -21
-                12.7 0 -24
-                12.75 0 -27
-                12.8 0 -35
-              ]
-      #"integer startP" [10 20]
-AttributeEnd
-AttributeBegin
-  Translate 2.5 10 0
-  Rotate -90 1 0 0
-  Rotate -27 0 0 1 
-  Texture "checks" "spectrum" "checkerboard"
-          "float uscale" [4] "float vscale" [4]
-          "rgb tex1" [1 0 0] "rgb tex2" [0 0 1]
-  Material "matte"
-#           "color Kd" [0 0 0]
-  Shape "hair" "float radius" [0.1]
-      "point p"
-              [
-                0 0 0
-                5 0 -3
-                8 0 -6
-                9 0 -9
-                10 0 -12
-                10.75 0 -15
-                12.6 0 -21
-                12.7 0 -24
-                12.75 0 -27
-                12.8 0 -35
-              ]
-      #"integer startP" [10 20]
-AttributeEnd
-AttributeBegin
-  Translate 2.75 10 0
-  Rotate -90 1 0 0
-  Rotate -30 0 0 1 
-  Texture "checks" "spectrum" "checkerboard"
-          "float uscale" [4] "float vscale" [4]
-          "rgb tex1" [1 0 0] "rgb tex2" [0 0 1]
-  Material "matte"
-#           "color Kd" [0 0 0]
-  Shape "hair" "float radius" [0.1]
-      "point p"
-              [
-                0 0 0
-                5 0 -3
-                8 0 -6
-                9 0 -9
-                10 0 -12
-                10.75 0 -15
-                12.6 0 -21
-                12.7 0 -24
-                12.75 0 -27
-                12.8 0 -35
-              ]
-      #"integer startP" [10 20]
-AttributeEnd
 WorldEnd
