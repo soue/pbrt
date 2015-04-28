@@ -75,6 +75,7 @@
 #include "lights/projection.h"
 #include "lights/spot.h"
 #include "materials/glass.h"
+#include "materials/hair.h"
 #include "materials/kdsubsurface.h"
 #include "materials/matte.h"
 #include "materials/measured.h"
@@ -384,7 +385,7 @@ Reference<Shape> MakeShape(const string &name,
 		printf("clump: %d\n", clump);
 		
 		vector<Reference<Shape> > cylinders;
-		if (p && np >= 2) {
+		if (np >= 2) {
 			float tx_inc = 0.025;
 			float a_inc = 0.25;
 			float a = -tx_inc;
@@ -483,6 +484,8 @@ Reference<Material> MakeMaterial(const string &name,
         material = CreateMeasuredMaterial(mtl2world, mp);
     else if (name == "shinymetal")
         material = CreateShinyMetalMaterial(mtl2world, mp);
+    else if (name == "hair")
+	material = CreateHairMaterial(mtl2world, mp);
     else
         Warning("Material \"%s\" unknown.", name.c_str());
     mp.ReportUnused();
