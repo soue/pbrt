@@ -29,7 +29,7 @@
 
  */
 
-
+#include <cstdio>
 // core/api.cpp*
 #include "stdafx.h"
 #include "api.h"
@@ -369,50 +369,64 @@ Reference<Shape> MakeShape(const string &name,
                              paramSet);
 	else if (name == "hair") {
 		int np, nsp, nclump;
-		const Point *p = paramSet.FindPoint("p", &np);
+		const Point *p_orig = paramSet.FindPoint("p", &np);
+		Point p[np];
+		for (int pp = 0; pp < np; pp++) {
+			p[pp] = p_orig[pp];
+		}
 		const int *startP = paramSet.FindInt("startP", &nsp);
 		float radius = paramSet.FindOneFloat("radius", 1);
 		printf("radius: %f\n", radius);
 		printf("find p: %d, %d\n", np, nsp);
 
-
-		int clump = paramSet.FindOneInt("clump", 1);
+		const int clump = paramSet.FindOneInt("clump", 1);
 		printf("clump= %d\n", clump);
-
 		
 		vector<Reference<Shape> > cylinders;
-		float current_r = radius;
+		//float current_r = radius;
 		
 		if (p && np >= 2) {
-			int j = 0;
-			if (startP && startP[j] == 0) j++;
+			//int j = 0;
+			//if (startP && startP[j] == 0) j++;
 
-			for (int i = 0; i < np - 1; i++) {
-				if (startP && j < nsp && startP[j] == i + 1) {
-					current_r = radius;
-					j++;
-					continue;
-				}
+			float t_x = 0.025;
+			float a = 0.25;
+			Matrix4x4 trans, rot;
+			Transform* t;
+			for (int k = 0; k < clump; k++) {
+				float current_r = radius;
+				trans = Translate(Vector(t_x,0,0)).GetMatrix();
+				rot = RotateY(a).GetMatrix();
+				t = new Transform(Matrix4x4::Mul(rot, trans));
+				t->Print(stdout);
+				t_x += 0.025;
+				a -= 0.25;
+				for (int pind = 0; pind < np; pind++) {
+					p[pind] = Point((*t)(p[pind]));
+				}	
+				int j = 0;
+				if (startP && startP[j] == 0) j++;
+
+				for (int i = 0; i < np - 1; i++) {
+					if (startP && j < nsp && startP[j] == i + 1) {
+						current_r = radius;
+						j++;
+						continue;
+					}
 				
-				float translation = 0.25;
-				float rotation = 3;
-				float t = 0;
-				float r = 0;
-				for (int j = 0; j < clump; j++) {
+					Vector rel = p[i+1] - p[i];
+			//		printf("%f,%f,%f\n", p[i].x, p[i].y, p[i].z);
+			//		printf("%f,%f,%f\n", p[i+1].x, p[i+1].y, p[i+1].z);
+					float length = rel.Length();
 
-				Vector rel = p[i+1] - p[i];
-				printf("%f,%f,%f\n", p[i].x, p[i].y, p[i].z);
-				printf("%f,%f,%f\n", p[i+1].x, p[i+1].y, p[i+1].z);
-				float length = rel.Length();
-
-				Transform *ObjectToWorld = new Transform((Translate(Vector(p[i])) * fromFrame(rel / length)).GetMatrix());
-				Transform *o2w, *w2o;
-				pbrtConcatTransform1(*ObjectToWorld);
-				transformCache.Lookup(curTransform[0], &o2w, &w2o);
-				Cylinder *c = new Cylinder(o2w, w2o, reverseOrientation, current_r, -0.1f * length, length, 360);
-				cylinders.push_back(c);
-				pbrtConcatTransform1(Inverse(*ObjectToWorld));
-				current_r -= 0.05 * radius;
+					Transform *ObjectToWorld = new Transform((Translate(Vector(p[i])) * fromFrame(rel / length)).GetMatrix());
+					Transform *o2w, *w2o;
+					pbrtConcatTransform1(*ObjectToWorld);
+					transformCache.Lookup(curTransform[0], &o2w, &w2o);
+					Cylinder *c = new Cylinder(o2w, w2o, reverseOrientation, current_r, -0.1f * length, length, 360);
+					cylinders.push_back(c);
+					pbrtConcatTransform1(Inverse(*ObjectToWorld));
+					current_r -= 0.05 * radius;
 
 				}
 			}
