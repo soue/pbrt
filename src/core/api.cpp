@@ -29,7 +29,6 @@
 
  */
 
-#include <cstdio>
 // core/api.cpp*
 #include "stdafx.h"
 #include "api.h"
