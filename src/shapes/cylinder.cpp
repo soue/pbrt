@@ -45,7 +45,18 @@ Cylinder::Cylinder(const Transform *o2w, const Transform *w2o, bool ro,
     zmin = min(z0, z1);
     zmax = max(z0, z1);
     phiMax = Radians(Clamp(pm, 0.0f, 360.0f));
-}
+}								
+
+Cylinder::Cylinder(const Transform *o2w, const Transform *w2o, bool ro,
+                   float rad, Vector t, float pm)
+    : Shape(o2w, w2o, ro) {
+    radius = rad;
+    tangent = t;
+    float len = t.Length();
+    zmin = 0.0f;
+    zmax = len;
+    phiMax = Radians(Clamp(pm, 0.0f, 360.0f));
+}								
 
 BBox Cylinder::ObjectBound() const {
     Point p1 = Point(-radius, -radius, zmin);
@@ -210,10 +221,10 @@ Cylinder *CreateCylinderShape(const Transform *o2w, const Transform *w2o,
 
 	//o2w->Print(stdout);
 
-	Vector rel = p[1] - p[0];
-	float length = rel.Length();
-
-	return new Cylinder(o2w, w2o, reverseOrientation, radius, 0.0f, length, phimax);
+	Vector t = p[1] - p[0];
+	
+	return new Cylinder(o2w, w2o, reverseOrientation, radius, t, phimax);
+	//return new Cylinder(o2w, w2o, reverseOrientation, radius, 0.0f, length, phimax);
 }
 
 

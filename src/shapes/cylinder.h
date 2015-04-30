@@ -45,17 +45,21 @@ public:
     // Cylinder Public Methods
     Cylinder(const Transform *o2w, const Transform *w2o, bool ro, float rad,
              float zmin, float zmax, float phiMax);
+    Cylinder(const Transform *o2w, const Transform *w2o, bool ro, float rad,
+             Vector t, float phiMax);
     BBox ObjectBound() const;
     bool Intersect(const Ray &ray, float *tHit, float *rayEpsilon,
                    DifferentialGeometry *dg) const;
     bool IntersectP(const Ray &ray) const;
     float Area() const;
     Point Sample(float u1, float u2, Normal *Ns) const;
-	void printShape() const;
+    void printShape() const;
+    Vector GetTangent() { return tangent; }
 
 protected:
     // Cylinder Private Data
     float radius, zmin, zmax, phiMax;
+    Vector tangent;
 };
 
 
